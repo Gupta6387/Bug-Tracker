@@ -1,0 +1,609 @@
+/** THE RIDE NEVER ENDS **/
+/**
+ * page layout hax that are probably already in materialize.min.css {{{ 
+ */
+html {
+    overflow-x: hidden; 
+    overflow-x: -moz-hidden-unscrollable;
+}
+html,body#bunzilla { 
+    height: calc(100% - 60px) !important;
+}
+body#bunzilla { 
+    margin: 60px 0 0 0 !important;
+}
+#page-wrap { 
+    min-height: calc(100% - 150px + 60px) !important; 
+    margin-bottom: 0px;
+}
+#page-wrap::after {
+    content: none;
+    display: block;
+}
+body#bunzilla > footer.footer, 
+#page-wrap::after { 
+    padding: 0 !important; 
+    height: 150px !important;
+}
+#page-wrap > header { 
+    position: absolute; 
+    z-index: 1000;
+}
+
+/** }}}
+ * general purpose styles and fixes that should be in materialize.min.css {{{
+ */
+/* Elements */
+strong, b { 
+    font-weight: bold
+}
+blockquote {
+    margin-top: 0;
+    margin-bottom: 0;
+    width: calc(100% - 3em); 
+    padding: 0 0.5rem 1rem 0.5rem; 
+    overflow-x: auto;
+}
+blockquote pre { 
+    width: 100%; 
+    margin: 0;
+}
+p { margin: 0; }
+input, textarea, textarea:focus { 
+    border: 0 !important; 
+    box-shadow: none !important
+}
+input:checked ~ label { 
+    color: inherit;
+}
+
+/* Classes that exist or should */
+.small { font-size: 0.8889rem !important; }
+.tooltipped { cursor: help; }
+.material-tooltip { z-index: 10000 }
+.waves-effect { overflow: hidden !important; }
+.transparent { background: transparent; }
+.tag { padding: 2px; }
+.gone { display: none !important; }
+.section { padding: 1rem; }
+.dropdown-content { z-index: 10000 !important; }
+.btn-flat { background: transparent; }
+.hide-overflow-text {
+    max-width: calc(100% - 10em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+/* Media Queries */
+@media (max-width: 601px) {
+    .section { padding-left: 0; padding-right: 0; }
+    .tag::before { right: 0 !important; }
+}
+
+/** }}}
+ * Custom feature: data-textlabel {{{ */ 
+[data-textlabel] { position: relative; }
+[data-textlabel]::before {
+    content: attr(data-textlabel);
+    color: currentColor;
+    text-transform: lowercase;
+    position: absolute;
+    left: 0;
+    top: -5px;
+    font-size: 0.6667rem;
+    letter-spacing: 0px;
+    text-shadow: 0 4px rgba(0, 0, 0, 0.24), 0px 2px rgba(0, 0, 0, 0.19);
+}
+/** }}}
+ * Bunzilla-specific assets {{{
+ */
+.tag {
+    height: 24px;
+    z-index: 3;
+    position: relative;
+    top: 3px;
+    padding: 0.3333rem 1rem !important;
+    box-shadow: none !important;
+    min-width: 2rem !important;
+}
+.tag::before {
+    position: absolute;
+    right: -6px;
+    z-index: 2;
+    font-size: 12px !important;
+}
+.tag::after {
+    position: absolute;
+    top: 0px;
+    right: -12px;
+    content: '';
+    height: 0;
+    width: 0;
+    border-top: 12px transparent solid;
+    border-right: none;
+    border-bottom: 12px transparent solid;
+    border-left-width: 12px;
+    border-left-style: solid;
+}
+label span.tag {
+    line-height: 1.5
+}
+span.priority {
+    font-size: 0.8889rem !important;
+    margin: 3px 0 0 0;
+    height: 24px;
+}
+
+/** }}}
+ * The floating label effect in materialize is not well thought-out, {{{
+ * There is also a hack in tpl/material/assets/js/cottontail.js to fix it 
+ */
+input[autofocus] + label,
+input:not([type='checkbox']):not([type='radio']) + label.active {
+    font-size: 0.8rem;
+    -webkit-transform: translateY(-130%);
+    -moz-transform: translateY(-130%);
+    -ms-transform: translateY(-130%);
+    -o-transform: translateY(-130%);
+    transform: translateY(-130%);
+    color: inherit;
+}
+
+/** }}}
+ * Materialbox also needed a fix {{{
+ */
+#materialbox-overlay { 
+    z-index: 1000 !important;
+}
+.materialbox-caption, .material-placeholder[style] {
+    z-index: 1001 !important;
+    padding: 0 !important;
+}
+img { 
+    width: 50%;
+    cursor: zoom-in;
+}
+img.intialized.active {
+    cursor: zoom-out
+}
+
+/** }}}
+ * accordion overrides {{{
+ */
+.collapsible, .collapsible-header {
+    border: none !important;
+    box-shadow: none !important;
+}
+.collapsible label {
+    color: inherit !important;
+}
+.collapsible-body, .collapsible p, .collapsible li {
+    padding: 0 !important;
+    border: 0 !important;
+    clear: both !important;
+}
+.collapsible-header,.collapsible-body {
+    border-radius: 0;
+}
+.collapsible {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+.collapsible .row .col { 
+    padding: 0 !important;
+}
+.collapsible-body {
+    display: block;
+    max-height: 0px;
+    overflow: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-transition: max-height 350ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+    transform: translate3d(0,0,0);
+    transition: all 350ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+    -webkit-backface-visibility:hidden;
+    -webkit-perspective: 1000;
+}
+.collapsible-body.animated {
+    max-height: 1000px;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+/** }}}
+ * tab overrides which should be in materialize.min.css already {{{
+ */
+.tabs, ul.tabs li {
+    height: 2em !important;
+    line-height: 2em !important;
+    text-transform: none !important;
+}
+.tabs div.indicator { width: auto !important; }
+
+/** }}}
+ * I have no idea what a .thumb is; maybe it's for input[type=range] {{{
+ */
+.thumb {
+    display: inline-block;
+    text-align: center;
+}
+.thumb .value {
+    width: 50% !important;
+    margin: auto !important;
+    color: inherit !important;
+    transform: none !important;
+}
+
+/** }}}
+ * widgetry {{{
+ */
+#toolsModal {
+    padding: 0;
+}
+#toolsModal i::before {
+    font-size: inherit;
+}
+#toolsModal label {
+    display: block;
+}
+textarea ~ a[href="#toolsModal"] { 
+    position: absolute; 
+    right: 0; 
+    top: 0; 
+    opacity: 0; 
+    transition: all 0.2s ease-in
+}
+textarea:focus ~ a[href="#toolsModal"] {
+    opacity: 1;
+    top: -2em;
+}
+#withToolsModal div.input-field { 
+    position: relative;
+}
+
+/** }}}
+ * see report/listing.phtml {{{
+ */
+#list { 
+    height: 100%;
+}
+#list li {
+    margin: 0.5rem 0;
+}
+#list li .row {
+    margin: 0 !important
+}
+#list .collapsible-header {
+    cursor: pointer;
+    line-height: 1 !important;
+}
+#list .collapsible-header i[class*="icon"]:before {
+    font-size: 1rem;
+}
+/* note: I think this hover style is nice for links
+ * when combined with the transition
+ * and would like to use it in more places 
+ */
+#list .collapsible-header a:hover, 
+#tagCloud a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #2962FF;
+}
+#list .subject-line {
+     z-index: 110; 
+     overflow: hidden; 
+     clear: both;
+}
+#list .subject-line a { 
+    margin: 0 1em 0 0; 
+    line-height: 1.874em; 
+    display:inline-block; 
+    max-width: calc(100vw - 10em); 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    text-align: justify;
+}
+#list .subject-line span.badge.status {
+    padding: 8px 2px;
+    max-height: 2rem;
+    display: inline-block;
+    overflow: hidden;
+}
+#list .divider { 
+    margin: 1rem 0;
+}
+#list .row { 
+    margin-bottom: 0 !important;
+}
+#list .collapsible-header {
+    position: relative;
+    z-index: 100;
+    padding: 0;
+}
+#list .collapsible-body {
+    z-index: 99;
+    margin-top: -8px;
+}
+/* note: #fuck is the sorting toolbar on listing.phtml */
+#fuck .btn-flat { 
+    padding: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+    background: inherit;
+}
+#list span.tag {
+    z-index: -3;
+}
+#list span.priority {
+    padding: 4px 6px !important;
+}
+/* these assets are specific to listing.phtml */
+.comment-badge {
+    border-radius: 0 1rem 1rem 0;
+    font-size: 0.6667rem;
+    padding: 7px 6px 7px 1em;
+    position: relative;
+    z-index: 0;
+}
+.time_submitted, .time_lastactive {
+    font-size: 0.6667rem;
+    padding: 6px 6px 6px 1em;
+    z-index: -2;
+    position: absolute; 
+    top: 0;
+    right: 0;
+}
+.info-bar { 
+    height: 24px; 
+    position: relative; 
+    z-index: -1; 
+    top: 6px;
+}
+.info-bar span.badge.epenis {
+    left: -12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: relative;
+    top: -6px;
+    font-size: small;
+}
+.info-bar div.left {
+    position: relative;
+    z-index: 2;
+    top: -3px;
+}
+
+/** }}}
+ * sort arrow hacks based on the classes list.js sets {{{
+ */
+.btn-flat.asc i::before {
+    content: '\e845';
+}
+.btn-flat.desc i::before {
+    content: '\e842';
+}
+.btn-flat.asc, .btn-flat.desc {
+    background: #4eb3de !important;
+    color: #fff !important;
+}
+
+/** }}}
+ * top/sidebar hax which should be merged into gn-codrops.css {{{
+ */
+#gn-menu nav, #gn-menu li {
+    vertical-align: middle;
+}
+#gn-menu ul { 
+    line-height: 60px !important;
+}
+#gn-menu nav ul a, 
+#gn-menu nav * {
+    overflow: hidden;
+}
+#gn-menu {
+    -webkit-transition: width 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0s, 
+        background-color 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+    transition: width 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0s, 
+        background-color 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+}
+#gn-menu.headroom--pinned {
+    width: 100%;
+    background: #fff;
+    z-index: 10001;
+}
+#gn-menu.headroom--unpinned > li:not([class^="gn-trigger"]) {
+    font-size: 0px;
+    display: none;
+}
+#gn-menu.headroom--unpinned {
+    width: 60px;
+    background: transparent;
+}
+#gn-menu.headroom--unpinned .gn-icon-menu:before {
+    color: #fff;
+    opacity: 0.3;
+    text-shadow: 1px 1px 0px #000000, 
+        -1px 1px 0px #000000, 
+        1px -1px 0px #000000, 
+        -1px -1px 0px #000000;
+}
+#gn-menu .gn-menu { 
+    z-index: 10001;
+}
+#gn-menu small {
+    font-variant: normal;
+}
+
+/** }}}
+ * annoying page navigation button that's on every page on the Internet these days {{{
+ */
+#back-to-top {
+    position: fixed; bottom: 2em; right: 2em;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+}
+#back-to-top:hover {
+    opacity: 1;
+}
+.headroom--unpinned + #back-to-top:not(:hover) {
+    opacity: 0.5;
+}
+
+/** }}}
+ * Animated cursor input effect taken from bootstrap material design {{{
+ */
+@keyframes input-highlight {
+    0% { left: 20%; width: 20%; }
+    99% { width: 0px; left: 0px; opacity: 1; }
+    100% { opacity: 0; }
+}
+@-webkit-keyframes input-highlight {
+    0% { left: 20%; width: 20%; }
+    99% { width: 0px; left: 0px; opacity: 1; }
+    100% { opacity: 0; }
+}
+.input-field {
+    position: relative;
+}
+.material-input:before {
+     background-color: currentColor;
+     bottom: calc(1em - 1px);
+     content: "";
+     height: 2px;
+     left: 0px;
+     position: absolute;
+     transform: scaleX(0);
+     transition: transform 0s ease 0s;
+     width: 100%;
+}
+input:focus ~ .material-input:before, 
+textarea:focus ~ .material-input:before 
+{
+     transform: scaleX(1);
+     transition: transform 0.2s ease-out 0s;
+}
+.material-input:after {     
+     content: "";
+     height: 1.5em;
+     left: 0px;
+     margin-top: -1px;
+     opacity: 0.9;
+     pointer-events: none;
+     position: absolute;
+     top: 7px;
+     transform-origin: left center 0px;
+     width: 100px;
+}
+.input-lg ~ .material-input:after {
+     height: 26px;
+}
+input:focus ~ .material-input:after,
+textarea:focus ~ .material-input:after
+{
+     background-color: currentColor;
+     animation: 0.3s ease 0s normal forwards 1 input-highlight;
+     -webkit-animation: 0.3s ease 0s normal forwards 1 input-highlight;
+     opacity: 0;
+}
+
+/** }}}
+ * Breadcrumbs {{{
+ */
+.bc-container::before {
+    content: "\21b6 you are here";
+    position: fixed;
+    right: 1em;
+    top: -5px;
+    font-size: smaller;
+    letter-spacing: 0px;
+    text-shadow: 0 4px rgba(0, 0, 0, 0.24),
+        0px 2px rgba(0, 0, 0, 0.19);
+    z-index: 10000;
+}
+.bc-container::before::first-letter {
+    font-size: xx-large;
+}
+.bc-container,
+.bc-item {
+    max-height: 30px;
+    line-height: 30px;
+    margin: 0;
+}
+.bc-container {
+    margin-top: 15px;
+}
+.bc-triangle {
+    position: relative;
+    z-index: 10;
+}
+.bc-triangle::before, 
+.bc-triangle::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px;
+}
+.bc-triangle::before {
+    border-color: transparent transparent transparent #888;
+    left: 1px;
+}
+.bc-triangle::after {
+    border-color: transparent transparent transparent currentColor;
+    left: 0;
+    top: 0;
+}
+.bc-container a {
+    height: auto !important;
+    color: inherit;
+}
+.bc-parent {
+    width: calc(100% - 60px - 1em);
+}
+/* for that custom category dropdown thing */
+#gn-menu .select-wrapper span.select-dropdown:after {
+    position: static;
+}
+#gn-menu .select-wrapper span.select-dropdown {
+    border-style: none;
+    font-size: 1rem;
+    height: auto;
+    line-height: 30px;
+    color: inherit !important;
+    margin: 0 !important;
+}
+
+/* }}} */
+/*********************************************************
+ *                                                       *
+ * oddly specific miscellany that should be investigated *
+ *                                                       *
+ *********************************************************/
+header section.primary-base > * { margin: 0 !important; }
+header section.primary-base.waves-effect { display: block !important; }
+.active .collapsible-body.fuckityfuckfuck { overflow: visible; }*/
+.btn-flat:not(.btn-floating), .btn:not(.btn-floating) { padding: 0 0.5em !important }
+#gn-menu abbr[data-textlabel]::before { display: inline-block; width: 100vw;}
+#gn-menu a.waves-effect { display: block !important; }
+#gn-menu .bc-item a { max-height: 30px }
+.active .hide-on-active, .hide-on-inactive { font-size: 0; visibility: hidden; }
+.active .hide-on-inactive { font-size: 1rem; visibility: visible; }
+.collapsible-body:not(.animated) { box-shadow: none }
+.btn-large i { font-size: 2.6rem !important; }
+.btn-small i { font-size: 1.25rem !important;
+    position: absolute;
+    left: 0; /** ¯\_(ツ)_/¯ **/
+}
+time { z-index: 10001; }
+ul.list.section { padding-top: 0.5rem; } /** SHOOT ME $12 **/
+a:not([class]) { text-decoration: underline !important; }
+.input-field label, .input-field .prefix.active, textarea:focus, input[type]:focus { color: inherit !important; border-color: currentColor !important; }
+/* vim:set fdm=marker: */

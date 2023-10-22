@@ -1,0 +1,325 @@
+/**
+ * Google Nexus Website Menu v1.0.0
+ *
+ * http://tympanus.net/codrops/?p=16030
+ * 
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
+ */
+
+/**
+ * @tsonotes
+ * codrops example is based off of this:
+ * http://web.archive.org/web/20130731035203/http://www.google.com/nexus/
+ *
+ * some modifications made to this CSS include:
+ *  - translate3d() instead of translateX()
+ *  - cubic-bezier() added to transition
+ *  - removing webfont icons */
+
+/*#gn-menu, #gn-menu * { border: none !important; }*/
+
+#gn-menu {
+    transition: background 0.6s ease;
+    -webkit-transition: background 0.6s ease;
+    z-index: 2;
+}
+.gn-menu-main,
+.gn-menu-main ul {
+		margin: 0;
+		padding: 0;
+		background: #fff;
+		color: #000;
+		list-style: none;
+		font-weight: 300;
+		line-height: 60px;
+}
+
+.gn-menu-main {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+		font-size: 13px;
+}
+
+.gn-menu-main a {
+/*		display: block;
+		height: 100%;
+		text-decoration: none;*/
+		cursor: pointer;
+}
+
+.no-touch .gn-menu-main a:hover,
+.no-touch .gn-menu li.gn-search-item:hover,
+.no-touch .gn-menu li.gn-search-item:hover a {
+		background: #5f6f81;
+		color: white;
+}
+
+.gn-menu-main > li {
+		display: block;
+		height: 100%;
+		text-align: center;
+}
+
+.gn-menu-main li:not(.bc-parent) {
+}
+
+.gn-menu-main > li:not(.right) {
+		float: left;
+}
+
+/* icon-only trigger (menu item) */
+
+.gn-menu-main li.gn-trigger {
+		position: relative;
+		width: 60px;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+}
+
+.gn-menu-main > li > a {
+		padding: 0 30px;
+		font-weight: bold;
+}
+
+.gn-menu-main:after {
+		display: table;
+		clear: both;
+		content: "";
+}
+
+.gn-menu-wrapper {
+		position: fixed;
+		top: 60px;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		width: 60px;
+		background: white;
+		-webkit-transform: translateX(-60px);
+		-webkit-transform: translate3d(-60px,0px,0px);
+		-moz-transform: translate3d(-60px,0px,0px);
+		transform: translate3d(-60px,0px,0px);
+		-webkit-transition: -webkit-transform 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;, width 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+		-moz-transition: -moz-transform 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s, width 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+		transition: transform 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s, width 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+        z-index: 10;
+}
+
+.gn-scroller {
+		position: absolute;
+		overflow-y: scroll;
+		width: 370px;
+		height: 100%;
+}
+
+.gn-menu {
+		text-align: left;
+		font-size: 18px;
+}
+
+.gn-menu li:not(:first-child),
+.gn-menu li li {
+}
+
+.gn-submenu li {
+		overflow: hidden;
+		height: 0;
+		-webkit-transition: height 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+		-moz-transition: height 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+		transition: height 0.3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+}
+
+.gn-submenu li a {
+}
+
+
+input.gn-search {
+		position: absolute;
+        top: 0.5em;
+        left: 60px;
+		z-index: 10;
+		outline: none;
+		border: none;
+		background: transparent;
+		color: #000;
+		font-weight: 300;
+		cursor: pointer;
+        width: auto;
+}
+
+/* placeholder */
+
+.gn-search::-webkit-input-placeholder {
+		color: #888
+}
+
+.gn-search:-moz-placeholder {
+		color: #888
+}
+
+.gn-search::-moz-placeholder {
+		color: #888
+}
+
+.gn-search:-ms-input-placeholder {
+		color: #888
+}
+
+/* hide placeholder when active in Chrome */
+
+.gn-search:focus::-webkit-input-placeholder,
+.no-touch .gn-menu li.gn-search-item:hover .gn-search:focus::-webkit-input-placeholder {
+		color: transparent
+}
+
+input.gn-search:focus {
+		cursor: text;
+        left: 1em;
+        width: 66.6667%;
+}
+
+.no-touch .gn-menu li.gn-search-item:hover input.gn-search {
+		color: white
+}
+
+/* placeholder */
+
+.no-touch .gn-menu li.gn-search-item:hover .gn-search::-webkit-input-placeholder {
+		color: white
+}
+
+.no-touch .gn-menu li.gn-search-item:hover .gn-search:-moz-placeholder {
+		color: white
+}
+
+.no-touch .gn-menu li.gn-search-item:hover .gn-search::-moz-placeholder {
+		color: white
+}
+
+.no-touch .gn-menu li.gn-search-item:hover .gn-search:-ms-input-placeholder {
+		color: white
+}
+
+.gn-menu-main .gn-icon-search {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 60px;
+}
+
+.gn-icon::before {
+		display: inline-block;
+		width: 60px;
+		text-align: center;
+		text-transform: none;
+		font-weight: normal;
+		font-style: normal;
+		font-variant: normal;
+		font-family: 'bunzilla';
+		line-height: 1;
+		speak: none;
+		-webkit-font-smoothing: antialiased;
+}
+
+/* if an icon anchor has a span, hide the span */
+
+.gn-icon span {
+		width: 0;
+		height: 0;
+		display: block;
+		overflow: hidden;
+}
+
+.gn-icon.icon-search.active::before {
+    content: "";
+}
+
+.gn-icon-menu::before {
+		margin-left: -15px;
+		vertical-align: -2px;
+		width: 30px;
+		height: 3px;
+        font-size: xx-large;
+        text-shadow: 1px 1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px -1px 0 #fff,
+        1px 1px 2px #888
+}
+
+.gn-multiline {
+    position: relative;
+}
+
+.gn-multiline small {
+     color: #888;
+     line-height: normal;
+     position: absolute;
+     right: 0px;
+     top: 40px;
+     width: 100%;
+     font-variant: small-caps;
+}
+
+.gn-menu-main li[title]::before {
+    content: attr(title);
+    position: fixed;
+    z-index: 1;
+    font-size: 1.5em;
+    top: 0;
+    left: 4em;
+    text-align: left;
+    width: 100vw;
+    pointer-events: none;
+    color: #efefef;
+}
+
+.no-touch .gn-icon-menu:hover::before,
+.no-touch .gn-icon-menu.gn-selected:hover::before {
+		background: white;
+
+}
+
+.gn-icon-menu.gn-selected::before {
+}
+
+/* styles for opening menu */
+
+.gn-menu-wrapper.gn-open-all,
+.gn-menu-wrapper.gn-open-part {
+		-webkit-transform: translate3d(0px,0px,0px);
+		-moz-transform: translate3d(0px,0px,0px);
+		transform: translate3d(0px,0px,0px);
+}
+
+.gn-menu-wrapper.gn-open-all {
+		width: 340px
+}
+
+.gn-menu-wrapper.gn-open-all .gn-submenu li {
+		height: 60px
+}
+
+@media screen and (max-width: 422px) { 
+	.gn-menu-wrapper.gn-open-all {
+		-webkit-transform: translate3d(0px,0px,0px);
+			-moz-transform: translate3d(0px,0px,0px);
+			transform: translate3d(0px,0px,0px);
+			width: 100%;
+	}
+
+	.gn-menu-wrapper.gn-open-all .gn-scroller {
+			width: 130%
+	}
+}
